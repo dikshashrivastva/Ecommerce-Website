@@ -1,14 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>E-Commerce Store</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopCart</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- 1) Set your deployed backend URL here -->
+  <script>
+    // REPLACE with your Render URL, e.g. "https://shopcart-api.onrender.com"
+    window.API_BASE = "http://localhost:5000";
+  </script>
 </head>
 <body>
-  <h1>My E-Commerce Store</h1>
-  <input type="text" id="search" placeholder="Search products...">
-  <div id="product-list"></div>
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#/" class="brand">SHOPCART</a>
+      <form id="searchForm" class="searchbar">
+        <input id="searchInput" type="text" placeholder="Search Products" />
+        <button type="submit">SEARCH</button>
+      </form>
+      <nav class="nav-links">
+        <a href="#/cart" id="cartLink">🛒 CART <span id="cartCount" class="badge">0</span></a>
+        <a href="#/signin" id="authLink">👤 SIGNIN</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <h2 id="heroTitle">LOGITECH G-SERIES GAMING MOUSE</h2>
+        <div class="hero-slider">
+          <button class="slide-btn" id="slidePrev">‹</button>
+          <img id="heroImage" src="" alt="Featured Product" />
+          <button class="slide-btn" id="slideNext">›</button>
+        </div>
+        <div class="dots" id="heroDots"></div>
+      </div>
+
+      <h3 class="section-title">LATEST PRODUCTS</h3>
+      <div id="productGrid" class="grid"></div>
+    </section>
+
+    <!-- CART -->
+    <section id="view-cart" class="view">
+      <h2 class="page-title">SHOPPING CART</h2>
+      <div class="cart-layout">
+        <div class="cart-items" id="cartItems"></div>
+        <aside class="cart-summary">
+          <h4>SUBTOTAL (<span id="cartItemsCount">0</span>) ITEMS</h4>
+          <div id="cartSubtotal">$0.00</div>
+          <button id="checkoutBtn" class="primary" disabled>PROCEED TO CHECKOUT</button>
+        </aside>
+      </div>
+      <div id="cartEmpty" class="alert info hidden">Your Cart is Empty <a href="#/">Go Back</a></div>
+    </section>
+
+    <!-- SIGN IN -->
+    <section id="view-signin" class="view auth">
+      <h2 class="page-title">SIGN IN</h2>
+      <form id="signinForm" class="auth-form">
+        <label>Email Address
+          <input type="email" id="signinEmail" placeholder="Enter Email" required />
+        </label>
+        <label>Password
+          <input type="password" id="signinPassword" placeholder="Enter Password" required />
+        </label>
+        <button type="submit" class="primary">SIGN IN</button>
+      </form>
+      <p class="muted">New User ? <a href="#/register" id="toRegister">Register</a></p>
+      <div id="authMsg" class="alert hidden"></div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="view-register" class="view auth">
+      <h2 class="page-title">REGISTER</h2>
+      <form id="registerForm" class="auth-form">
+        <label>Name
+          <input type="text" id="registerName" placeholder="Enter Name" required />
+        </label>
+        <label>Email Address
+          <input type="email" id="registerEmail" placeholder="Enter Email" required />
+        </label>
+        <label>Password
+          <input type="password" id="registerPassword" placeholder="Create Password" required />
+        </label>
+        <button type="submit" class="primary">CREATE ACCOUNT</button>
+      </form>
+      <div id="registerMsg" class="alert hidden"></div>
+    </section>
+
+    <!-- SEARCH RESULTS -->
+    <section id="view-search" class="view">
+      <a href="#/" class="muted small">&larr; GO BACK</a>
+      <h2 class="page-title">LATEST PRODUCTS</h2>
+      <div id="searchNotice" class="alert info hidden"></div>
+      <div id="searchGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">&copy; <span id="year"></span> ShopCart</div>
+  </footer>
+
+  <template id="productCardTpl">
+    <div class="card">
+      <img class="card-img" />
+      <div class="card-body">
+        <a class="card-title"></a>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <span class="reviews small"></span>
+        </div>
+        <div class="price"></div>
+        <button class="add primary">Add to Cart</button>
+      </div>
+    </div>
+  </template>
 
   <script src="script.js"></script>
 </body>

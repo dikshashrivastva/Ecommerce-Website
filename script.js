@@ -1,5 +1,5 @@
 /* ---------- Config ---------- */
-const API_BASE = window.API_BASE || "http://localhost:5000"; // set in index.html
+const API_BASE = window.API_BASE || "https://shopcart-set5.onrender.com"; // set in index.html
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
